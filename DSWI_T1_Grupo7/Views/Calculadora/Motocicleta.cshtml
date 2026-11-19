@@ -1,0 +1,47 @@
+﻿@model DSWI_T1_Grupo7.Models.Motocicleta
+
+@{
+    ViewData["Title"] = "Descuento de Motocicletas";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">
+        Calculadora de descuentos
+    </h2>
+
+    <div class="card shadow p-4">
+        <h4>Precio original: $@Model.PrecioOriginal.ToString("N2")</h4>
+
+        <hr />
+
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Condición</th>
+                    <th>Descuento</th>
+                    <th>Precio final</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Martes</td>
+                    <td>12 %</td>
+                    <td>$@Model.CalcularPrecio(Model.DescuentoMartes).ToString("N2")</td>
+                </tr>
+
+                <tr>
+                    <td>Sábado</td>
+                    <td>18 %</td>
+                    <td>$@Model.CalcularPrecio(Model.DescuentoSabado).ToString("N2")</td>
+                </tr>
+
+                <tr>
+                    <td>Feriado</td>
+                    <td>25 %</td>
+                    <td>$@Model.CalcularPrecio(Model.DescuentoFeriado).ToString("N2")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
