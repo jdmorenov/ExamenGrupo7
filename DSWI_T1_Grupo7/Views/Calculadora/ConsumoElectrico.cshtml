@@ -1,0 +1,86 @@
+﻿@model DSWI_T1_Grupo7.Models.ConsumoElectrico
+
+@{
+    ViewData["Title"] = "Calculadora de Consumo Eléctrico";
+}
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3>Calculadora de Consumo Eléctrico</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="ConsumoElectrico" method="post">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="KwhConsumidos"
+                           class="form-label">
+                        Consumo eléctrico (kWh)
+                    </label>
+
+                    <input asp-for="KwhConsumidos"
+                           class="form-control"
+                           type="number"
+                           step="0.01"
+                           min="0.01"
+                           placeholder="Ingrese los kWh consumidos" />
+
+                    <span asp-validation-for="KwhConsumidos"
+                          class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Calcular consumo
+                </button>
+
+            </form>
+
+            @if (ViewData.ModelState.IsValid &&
+                 Model.Subtotal > 0)
+            {
+                <hr />
+
+                <h4 class="mb-3">Resultado del cálculo</h4>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Consumo registrado</th>
+                        <td>@Model.KwhConsumidos kWh</td>
+                    </tr>
+
+                    <tr>
+                        <th>Subtotal</th>
+                        <td>$ @Model.Subtotal.ToString("N2")</td>
+                    </tr>
+
+                    <tr>
+                        <th>Impuesto aplicado</th>
+                        <td>@(Model.PorcentajeImpuesto * 100)%</td>
+                    </tr>
+
+                    <tr>
+                        <th>Monto del impuesto</th>
+                        <td>$ @Model.MontoImpuesto.ToString("N2")</td>
+                    </tr>
+
+                    <tr class="table-success">
+                        <th>TOTAL A PAGAR</th>
+                        <th>$ @Model.Total.ToString("N2")</th>
+                    </tr>
+                </table>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
