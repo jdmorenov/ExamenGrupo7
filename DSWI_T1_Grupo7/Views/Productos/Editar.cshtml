@@ -1,0 +1,12 @@
+@model DSWI_T1_Grupo7.Models.Producto
+@{ ViewData["Title"] = "Editar producto"; }
+<h1>Editar producto</h1>
+<form asp-action="Editar" asp-route-id="@Model.ProductoId" method="post">
+    <input type="hidden" asp-for="ProductoId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3"><label asp-for="Nombre" class="form-label"></label><input asp-for="Nombre" class="form-control" /><span asp-validation-for="Nombre" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="Categoria" class="form-label"></label><input asp-for="Categoria" class="form-control" /><span asp-validation-for="Categoria" class="text-danger"></span></div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,15 @@
+@model DSWI_T1_Grupo7.Models.Inventario
+@{ ViewData["Title"] = "Editar inventario"; }
+<h1>Editar registro de inventario</h1>
+<form asp-action="Editar" asp-route-id="@Model.InventarioId" method="post">
+    <input type="hidden" asp-for="InventarioId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3"><label asp-for="FechaIngreso" class="form-label">Fecha de ingreso</label><input asp-for="FechaIngreso" type="date" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="Cantidad" class="form-label"></label><input asp-for="Cantidad" type="number" min="0" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="Ubicacion" class="form-label"></label><input asp-for="Ubicacion" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="Estado" class="form-label"></label><input asp-for="Estado" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="ProductoId" class="form-label">Producto</label><select asp-for="ProductoId" asp-items="ViewBag.Productos" class="form-select"><option value="">Seleccione un producto</option></select></div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

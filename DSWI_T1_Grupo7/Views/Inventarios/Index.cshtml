@@ -1,0 +1,17 @@
+@model IEnumerable<DSWI_T1_Grupo7.Models.Inventario>
+@{ ViewData["Title"] = "Inventario"; var nombres = ViewBag.NombresProductos as IDictionary<int, string> ?? new Dictionary<int, string>(); }
+<h1>Inventario</h1>
+<p><a asp-action="Crear" class="btn btn-primary">Nuevo registro</a></p>
+<table class="table table-striped">
+    <thead><tr><th>ID</th><th>Fecha de ingreso</th><th>Cantidad</th><th>Ubicación</th><th>Estado</th><th>Producto</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.InventarioId</td><td>@item.FechaIngreso</td><td>@item.Cantidad</td><td>@item.Ubicacion</td><td>@item.Estado</td>
+            <td>@(item.ProductoId.HasValue && nombres.ContainsKey(item.ProductoId.Value) ? nombres[item.ProductoId.Value] : "-")</td>
+            <td><a asp-action="Editar" asp-route-id="@item.InventarioId" class="btn btn-sm btn-warning">Editar</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
